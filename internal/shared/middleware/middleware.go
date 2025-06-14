@@ -24,7 +24,7 @@ func (m *middleware) PanicRecovery(next http.Handler) http.Handler {
 		defer func() {
 			if rec := recover(); rec != nil {
 				m.log.Errorf("[%s] Panic recovered: %v", r.URL.String(), rec)
-				w.WriteHeader(500)
+				w.WriteHeader(http.StatusInternalServerError)
 			}
 		}()
 

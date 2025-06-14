@@ -24,8 +24,8 @@ func (m *httpResponse) WriteResponse(w http.ResponseWriter, r *http.Request, cod
 	}
 
 	pretty, _ := json.MarshalIndent(resp, "", "  ")
-	if m.isDebug || code >= 500 {
-		if code >= 500 {
+	if m.isDebug || code >= http.StatusInternalServerError {
+		if code >= http.StatusInternalServerError {
 			m.log.Errorf("[%s] '%s' Response: %s", r.Method, r.URL.String(), pretty)
 		} else {
 			m.log.Debugf("[%s] '%s' Response: %s", r.Method, r.URL.String(), pretty)
