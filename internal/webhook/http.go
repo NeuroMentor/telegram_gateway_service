@@ -14,7 +14,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type Handler interface {
+type HttpHandler interface {
 	ProcessUpdate(w http.ResponseWriter, r *http.Request)
 	ProcessMessage(w http.ResponseWriter, r *http.Request)
 	ProcessCallback(w http.ResponseWriter, r *http.Request)
@@ -39,7 +39,7 @@ func NewWebhookHandler(
 	webhookService Service,
 
 	validationFormat strfmt.Registry,
-) Handler {
+) HttpHandler {
 	return &webhookHandler{
 		httpResponse: httpResponse,
 		converter:    converter,

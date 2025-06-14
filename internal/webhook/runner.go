@@ -16,7 +16,7 @@ type handlerV1 struct {
 	httpResp response.HttpResponse
 	log      logger.Logger
 
-	Handler
+	HttpHandler
 }
 
 func NewRunnerHandlerV1(
@@ -37,13 +37,13 @@ func NewRunnerHandlerV1(
 
 		log: log,
 
-		Handler: NewWebhookHandler(httpResp, converter, webhookService, validationFormat),
+		HttpHandler: NewWebhookHandler(httpResp, converter, webhookService, validationFormat),
 	}
 }
 
 func (m *handlerV1) Init() []runner.Runner {
 	return []runner.Runner{
-		m.Handler,
+		m.HttpHandler,
 	}
 }
 
